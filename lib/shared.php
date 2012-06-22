@@ -75,12 +75,7 @@ function callHook() {
 	}
 }
 function __autoload($className) {
-	if (strstr ($className, 'Sirprize')){
-		require_once (ROOT . DS . 'lib'. DS . $className .'.php');
-	} else if (strstr ($className, 'Zend')) {
-		$className = str_replace('_', DS, $className);
-		require_once (ROOT . DS . 'vendor'. DS .'zend-framework'. DS .'library'. DS . $className .'.php');
-	} else if (file_exists(ROOT . DS . 'libr' . DS . strtolower($className) . '.class.php')) {
+	if (file_exists(ROOT . DS . 'lib' . DS . strtolower($className) . '.class.php')) {
 		require_once(ROOT . DS . 'lib' . DS . strtolower($className) . '.class.php');
 	} else if (file_exists(ROOT . DS . 'app' . DS . 'controllers' . DS . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . 'app' . DS . 'controllers' . DS . strtolower($className) . '.php');
@@ -91,33 +86,6 @@ function __autoload($className) {
 	}
 }
 
-define('APPLICATION_PATH', ROOT);
-
-// Build array of 3 different paths
-$paths = array(
-		APPLICATION_PATH,
-		APPLICATION_PATH . '\app',
-		APPLICATION_PATH . '\vendor\zend-framework\library',
-		get_include_path()
-);
-
-
-/*
- Result of array above...
-Array
-(
-		[0] => E:\Web Server\xampp\htdocs\test
-		[1] => E:\Web Server\xampp\htdocs\test\com
-		[2] => .;C:\php5\pear
-)
-*/
-
-// Set include path from array above
-// http://us3.php.net/manual/en/function.set-include-path.php
-set_include_path(implode(PATH_SEPARATOR, $paths));
-
-$logWriter = new Zend_Log_Writer_Stream($base.'/_logs/'.gmdate('Ymd').'.log');
-$log = new Zend_Log($logWriter);
 
 setReporting();
 callHook();

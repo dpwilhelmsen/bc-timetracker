@@ -18,6 +18,10 @@ ini_set('display_errors', 'On');
 	  echo '<ul>';
 	  foreach($todo['body']->{'todo-list'} as $todol) {
 		echo '<li>'.$todol->name.'</li>';
+		echo $todol->id;
+		foreach($todo->id as $todoi) {
+			//getTodoItemsForList()
+		}
 	  }
 	  echo '</ul>';
 	}
