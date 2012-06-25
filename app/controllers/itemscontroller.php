@@ -1,14 +1,14 @@
 <?php
 
-class IndexController {
+class ItemsController extends Controller {
 	public function beforeAction() {
 		
 	}
 	public function index(){
-		$bc = new Basecamp('https://xxx.basecamphq.com/','xxx','xxx');
+		$bc = new Basecamp(BC_URL, BC_USER, BC_PASS);
 		$response = $bc->getProjects();
 		// iterate the projects
-		foreach($response['body']->project as $project) {
+		/*foreach($response['body']->project as $project) {
 			//print_r($project);
 			echo $project->name.'</br>';
 			$todo = $bc->getTodoListsForProject($project->id);
@@ -28,7 +28,12 @@ class IndexController {
 				echo '</ul>';
 			}
 			echo '</ul>';
-		}
+		}*/
+		$this->set('title','My Todo List App');
+		$this->set('testVal', 'the value');
+		$projects = $this->Item->stuff();
+		$this->set('projects', $projects);
+		//var_dump($projects);
 	}
 	public function test() {
 		echo 'test';

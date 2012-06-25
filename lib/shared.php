@@ -82,10 +82,10 @@ function __autoload($className) {
 	} else if (file_exists(ROOT . DS . 'app' . DS . 'models' . DS . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . 'app' . DS . 'models' . DS . strtolower($className) . '.php');
 	} else {
-		echo $className;
+		echo 'Error:' . $className;
 	}
 }
-
+$inflect = new Inflection();
 
 setReporting();
 callHook();

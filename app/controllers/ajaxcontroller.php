@@ -1,13 +1,12 @@
 <?php
 class AjaxController {
 	public function beforeAction() {
-	
+		$bc = new Basecamp(BC_URL, BC_USER, BC_PASS);
 	}
 	/**
 	 * Fetches All Projects
 	 */
 	public function projects() {
-		$bc = new Basecamp('https://xxx.basecamphq.com/','xxx','xxx');
 		$response = $bc->getProjects();
 		//var_dump($response);
 		echo '<pre>';
@@ -24,7 +23,6 @@ class AjaxController {
 	 */
 	public function todos($id) {
 		echo $id;
-		$bc = new Basecamp('https://xxx.basecamphq.com/','xxx','xxx');
 		$response = $bc->getTodoListsForProject($id,'pending');
 		$count = 1;
 		echo '<pre>';
@@ -42,7 +40,6 @@ class AjaxController {
 		$mtime = $mtime[1] + $mtime[0];
 		$starttime = $mtime;
 		
-		$bc = new Basecamp('https://xxx.basecamphq.com/','xxx','xxx');
 		$response = $bc->getProjects();
 		//var_dump($response);
 		echo '<pre>';
