@@ -1,6 +1,7 @@
 <html>
 <head>
 <title><?php echo $title?></title>
+<link rel='stylesheet' media='all' href='/bc-timetracker/css/style.css' />
 <style>
 .item {
 width:400px;
@@ -30,14 +31,7 @@ line-height:1.2em;
 a:hover {
 	background-color:#BCFC3D;
 }
-h1 {
-color:#000000;
-font-size:41px;
-letter-spacing:-2px;
-line-height:1em;
-font-family:helvetica,arial,sans-serif;
-border-bottom:1px dotted #cccccc;
-}
+
 
 h2 {
 color:#000000;
@@ -50,4 +44,5 @@ font-family:helvetica,arial,sans-serif;
 </style>
 </head>
 <body>
-<h1></h1>
+<div id="wrapper">
+<h1>BaseCamp TimeTracker</h1>

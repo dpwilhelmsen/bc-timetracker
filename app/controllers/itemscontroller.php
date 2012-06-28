@@ -29,11 +29,10 @@ class ItemsController extends Controller {
 			}
 			echo '</ul>';
 		}*/
-		$this->set('title','My Todo List App');
-		$this->set('testVal', 'the value');
-		$projects = $this->Item->stuff();
+		$this->set('title','BaseCamp TimeTracker');
+		$projects = $this->Item->getProjects();
+		//$todos = 
 		$this->set('projects', $projects);
-		//var_dump($projects);
 	}
 	public function test() {
 		echo 'test';

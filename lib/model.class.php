@@ -8,7 +8,16 @@ class Model extends SQLQuery {
 		$this->_model = get_class($this);
 		$this->_table = strtolower($this->_model)."s";
 	}
-
+	/*function connect($hostname, $username, $password, $dbname) {
+		try {
+			$this->dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+			echo 'connect';
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}*/
 	function __destruct() {
 	}
 }
