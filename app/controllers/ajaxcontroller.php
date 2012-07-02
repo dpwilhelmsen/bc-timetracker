@@ -23,16 +23,36 @@ class AjaxController {
 	 * @param int $id
 	 */
 	public function todos($id) {
+		$model = new Item;
+		$results = $model->todos($id);
+		//var_dump($results['items']);
 		$bc = new Basecamp(BC_URL, BC_USER, BC_PASS);
-		$response = $bc->getTodoListsForProject($id,'pending');
-		$count = 1;
-		echo '<pre>';
+		$response = $bc->getTodoListsForProject($id, 'pending');
+		$count = 0;
+		//var_dump($response['body']);
+		$itemArray = array();
 		foreach($response['body']->{'todo-list'} as $todoList) {
-			$items = $bc->getTodoItemIdsForList($todoList->id);
-			var_dump($items);
-			$count++;
+			if(!array_key_exists((int) $todoList->id, $results['items'])){ 
+				//TODO - Send info to database
+			}
+			$items = $bc->getTodoItemsForList($todoList->id);
+			//var_dump($items['body']);
+			foreach($items['body']->{'todo-item'} as $item) {
+				//var_dump($item);
+				if((string)$item->completed === 'false'){
+				$itemArray[(int)$todoList->id][$count]['id'] = (string)$item->id;
+				$itemArray[(int)$todoList->id][$count]['list_id'] = (int) $todoList->id;
+				$itemArray[(int)$todoList->id][$count]['name'] = (string) $item->content;
+				$itemArray[(int)$todoList->id][$count]['complete'] = (string) $item->completed;
+				$itemArray[(int)$todoList->id][$count]['position'] = (int) $item->position;
+				$count++;
+				}
+			}
 		}
-		echo $count . ' Requests.';
+		$h = new Helper;
+		$compare = $h->multidimensional_array_diff($itemArray, $results['items']);
+		
+		
 	}
 	public function all(){
 		$bc = new Basecamp(BC_URL, BC_USER, BC_PASS);

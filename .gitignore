@@ -3,3 +3,4 @@ tests/TestConfiguration.php
 example/basecamp/_config.php
 example/_logs/*
 /app/config.php
+/app/config.php
